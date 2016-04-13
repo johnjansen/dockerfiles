@@ -1,12 +1,12 @@
-    FROM python:2.7.10
+FROM python:2.7.10
+MAINTAINER      johnjansen
+RUN pip install --upgrade pip
+RUN pip install progressbar
+RUN pip install https://github.com/babilen/wp-download/zipball/master
 
-    RUN pip install --upgrade pip
-    RUN pip install progressbar
-    RUN pip install https://github.com/babilen/wp-download/zipball/master
+ADD wpdownloadrc.conf /root/.wpdownloadrc
 
-    ADD wpdownloadrc.conf /root/.wpdownloadrc
-    
-    RUN mkdir /wikipedia
-    VOLUME ["/wikipedia"]
+RUN mkdir /wikipedia
+VOLUME ["/wikipedia"]
 
-    ENTRYPOINT ["wp-download", "--resume", "-v", "/wikipedia"]
+ENTRYPOINT ["wp-download", "--resume", "-v", "/wikipedia"]
